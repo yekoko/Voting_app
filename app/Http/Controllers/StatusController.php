@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Status;
 use Illuminate\Http\Request;
-use App\Models\Idea;
-use App\Models\Category;
 
-class IdeaController extends Controller
+class StatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +14,7 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        $ideas = Idea::with('user','category','status')->simplePaginate();
-
-        $categories = Category::all();
-
-        return view('idea.index', compact('ideas','categories'));
+        //
     }
 
     /**
@@ -46,21 +41,21 @@ class IdeaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Idea  $idea
+     * @param  \App\Models\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function show(Idea $idea)
+    public function show(Status $status)
     {
-        return view('idea.show', compact('idea'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Idea  $idea
+     * @param  \App\Models\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function edit(Idea $idea)
+    public function edit(Status $status)
     {
         //
     }
@@ -69,10 +64,10 @@ class IdeaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Idea  $idea
+     * @param  \App\Models\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Idea $idea)
+    public function update(Request $request, Status $status)
     {
         //
     }
@@ -80,10 +75,10 @@ class IdeaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Idea  $idea
+     * @param  \App\Models\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Idea $idea)
+    public function destroy(Status $status)
     {
         //
     }
