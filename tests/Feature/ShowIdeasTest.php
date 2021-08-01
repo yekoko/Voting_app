@@ -8,6 +8,7 @@ use Tests\TestCase;
 use App\Models\Idea;
 use App\Models\Category;
 use App\Models\Status;
+use App\Models\User;
 
 class ShowIdeasTest extends TestCase
 {
@@ -18,6 +19,8 @@ class ShowIdeasTest extends TestCase
 
     public function list_of_ideas_show_on_main_page()
     {
+        $user = User::factory()->create();
+
         $statusOne = Status::factory()->create(["name" => 'Open', "classes" =>  "bg-gray-200" ]);
         $statusTwo = Status::factory()->create(["name" => 'Considering', "classes" =>  "bg-purple text-white"]);
 
@@ -25,6 +28,7 @@ class ShowIdeasTest extends TestCase
         $catTwo = Category::factory()->create(['name' => 'Category 2']);
 
         $ideaOne = Idea::factory()->create([
+            'user_id' => $user->id,
             'title' => 'My First Title',
             'category_id' => $catOne->id,
             'status_id' => $statusOne->id,
@@ -32,6 +36,7 @@ class ShowIdeasTest extends TestCase
         ]);
 
         $ideaTwo = Idea::factory()->create([
+            'user_id' => $user->id,
             'title' => 'My Second Title',
             'category_id' => $catTwo->id,
             'status_id' => $statusTwo,
@@ -54,10 +59,13 @@ class ShowIdeasTest extends TestCase
 
     public function single_ideas_shows_on_the_show_page()
     {
+        $user = User::factory()->create();
+
         $statusOne = Status::factory()->create(["name" => 'Open', "classes" =>  "bg-gray-200" ]);
         $catOne = Category::factory()->create(['name' => 'Category 1']);
 
         $idea = Idea::factory()->create([
+            'user_id' => $user->id,
             'title' => 'My First Title',
             'category_id' => $catOne->id,
             'status_id' => $statusOne->id,
@@ -76,10 +84,12 @@ class ShowIdeasTest extends TestCase
     
     public function ideas_pagination_works()
     {
+        $user = User::factory()->create();
+        
         $statusOne = Status::factory()->create(["name" => 'Open', "classes" =>  "bg-gray-200" ]);
         $catOne = Category::factory()->create(['name' => 'Category 1']); 
 
-        Idea::factory(16)->create(['category_id' => $catOne->id, 'status_id' => $statusOne->id, ]);
+        Idea::factory(16)->create(['user_id' => $user->id, 'category_id' => $catOne->id, 'status_id' => $statusOne->id, ]);
 
         $ideaOne = Idea::find(1);
         $ideaOne->title = 'My First Title';
@@ -91,22 +101,25 @@ class ShowIdeasTest extends TestCase
 
 
         $this->get('/')
-             ->assertSee($ideaOne->title)
-             ->assertDontSee($ideaEleven->title);
-
-        $this->get('/?page=2')
              ->assertDontSee($ideaOne->title)
              ->assertSee($ideaEleven->title);
+
+        $this->get('/?page=2')
+             ->assertSee($ideaOne->title)
+             ->assertDontSee($ideaEleven->title);
     }
 
     /** @test */
     
     public function some_idea_title_different_slugs()
     {
+        $user = User::factory()->create();
+
         $statusOne = Status::factory()->create(["name" => 'Open', "classes" =>  "bg-gray-200" ]);
         $catOne = Category::factory()->create(['name' => 'Category 1']); 
 
         $ideaOne = Idea::factory()->create([
+            'user_id' => $user->id,
             'title' => 'My First Title',
             'category_id' => $catOne->id,
             'status_id' => $statusOne->id,
@@ -114,6 +127,7 @@ class ShowIdeasTest extends TestCase
         ]);
 
         $ideaTwo = Idea::factory()->create([
+            'user_id' => $user->id,
             'title' => 'My Second Title',
             'category_id' => $catOne->id,
             'status_id' => $statusOne->id,
