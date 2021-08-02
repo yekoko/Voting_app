@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Idea;
 use App\Models\Category;
+use App\Models\Vote;
 
 class IdeaController extends Controller
 {
@@ -15,11 +16,17 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        $ideas = Idea::with('user','category','status')->withCount('votes')->orderBy('id','desc')->simplePaginate();
+        // $ideas = Idea::with('user','category','status')
+        //     ->addSelect([
+        //         'voted_by_user' => Vote::select('id')
+        //             ->where('user_id', auth()->id())
+        //             ->whereColumn('idea_id', 'ideas.id')
+        //     ])
+        //     ->withCount('votes')
+        //     ->orderBy('id','desc')
+        //     ->simplePaginate();
 
-        $categories = Category::all();
-
-        return view('idea.index', compact('ideas','categories'));
+        return view('idea.index');
     }
 
     /**
