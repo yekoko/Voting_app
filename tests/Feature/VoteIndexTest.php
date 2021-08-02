@@ -75,7 +75,7 @@ class VoteIndexTest extends TestCase
         Livewire::test(IdeasIndex::class)
              ->assertViewHas('ideas', function($ideas){
                 return $ideas->first()->votes_count == 2;
-             });;
+             });
 
 
 
