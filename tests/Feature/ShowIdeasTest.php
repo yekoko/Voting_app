@@ -48,11 +48,11 @@ class ShowIdeasTest extends TestCase
              ->assertSee($ideaOne->title)
              ->assertSee($ideaOne->description)
              ->assertSee($catOne->name)
-             ->assertSee($statusOne->classes)
+             ->assertSee('<div class="bg-gray-200 text-xs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>', false)
              ->assertSee($ideaTwo->title)
              ->assertSee($ideaTwo->description)
              ->assertSee($catTwo->name)
-             ->assertSee($statusTwo->classes);
+             ->assertSee('<div class="bg-purple text-white text-xs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Considering</div>', false);
     }
 
     /** @test */
@@ -144,5 +144,59 @@ class ShowIdeasTest extends TestCase
              ->assertSuccessful();
 
         $this->assertTrue(request()->path() === 'idea/my-second-title') ;
+    }
+
+
+    /** @test */
+
+    public function back_button_works_when_index_page_visited_first()
+    {
+        $user = User::factory()->create();
+
+        $statusOne = Status::factory()->create(["name" => 'Open', "classes" =>  "bg-gray-200" ]);
+        $statusTwo = Status::factory()->create(["name" => 'Considering', "classes" =>  "bg-purple text-white"]);
+
+        $catOne = Category::factory()->create(['name' => 'Category 1']);
+        $catTwo = Category::factory()->create(['name' => 'Category 2']);
+
+        $ideaOne = Idea::factory()->create([
+            'user_id' => $user->id,
+            'title' => 'My First Title',
+            'category_id' => $catOne->id,
+            'status_id' => $statusOne->id,
+            'description' => 'Test Description'
+        ]);
+
+        $response = $this->get('/?category=Category%202&status=Considering');
+        $response = $this->get(route('idea.show', $ideaOne));
+
+        $this->assertStringContainsString('/?category=Category%202&status=Considering', $response['back_url']);
+        
+    }
+
+    /** @test */
+
+    public function back_button_works_when_show_page_only_visited()
+    {
+        $user = User::factory()->create();
+
+        $statusOne = Status::factory()->create(["name" => 'Open', "classes" =>  "bg-gray-200" ]);
+        $statusTwo = Status::factory()->create(["name" => 'Considering', "classes" =>  "bg-purple text-white"]);
+
+        $catOne = Category::factory()->create(['name' => 'Category 1']);
+        $catTwo = Category::factory()->create(['name' => 'Category 2']);
+
+        $ideaOne = Idea::factory()->create([
+            'user_id' => $user->id,
+            'title' => 'My First Title',
+            'category_id' => $catOne->id,
+            'status_id' => $statusOne->id,
+            'description' => 'Test Description'
+        ]);
+
+        $response = $this->get(route('idea.show', $ideaOne));
+
+        $this->assertEquals(route('idea.index'), $response['back_url']);
+        
     }
 }

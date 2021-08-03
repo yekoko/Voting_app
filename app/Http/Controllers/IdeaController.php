@@ -58,8 +58,9 @@ class IdeaController extends Controller
      */
     public function show(Idea $idea)
     {
+        $back_url = url()->previous() !== url()->full() ? url()->previous() : route('idea.index');
         $voteCount = $idea->votes()->count();
-        return view('idea.show', compact('idea', 'voteCount'));
+        return view('idea.show', compact('idea', 'voteCount','back_url'));
     }
 
     /**
