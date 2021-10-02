@@ -38,16 +38,27 @@
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
                                 </svg>
                             </button>
+                            @can('update', $idea)
                             <ul 
                                 x-cloak
                                 x-show.transition.origin.top.left="isOpen"
                                 @click.away="isOpen = false"
                                 @keydown.escape.window="isOpen = false"
-                                class="absolute w-44 text-left font-semibold bg-white shadow-dialog rounded-xl py-3 z-10 md:ml-8 top-8 md:top-6 right-0 md:left-0">
-                                <li><a href="#" class="hover:bg-gray-100 block px-5 py-3">Edit Idea</a></li> 
+                                class="absolute w-44 text-left font-semibold bg-white shadow-dialog rounded-xl py-3 z-10 md:ml-8 top-8 md:top-6 right-0 md:left-0"
+                            >
+                                <li>
+                                    <a 
+                                        href="#" 
+                                        @click="
+                                            isOpen = false 
+                                            $dispatch('custom-show-edit-modal')
+                                        "
+                                        class="hover:bg-gray-100 block px-5 py-3">Edit Idea</a>
+                                </li> 
                                 <li><a href="#" class="hover:bg-gray-100 block px-5 py-3">Delete Post</a></li>
                                 <li><a href="#" class="hover:bg-gray-100 block px-5 py-3">Mark as Spam</a></li>
                             </ul>
+                            @endcan
                         </div>
                         
                     </div>
