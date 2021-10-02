@@ -30,22 +30,26 @@
                         <div class="{{ $idea->status->classes }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">
                             {{ $idea->status->name }}
                         </div>
-                        <button
-                            @click="isOpen = !isOpen"  
-                            class="bg-gray-100 relative hover:bg-gray-200 border rounded-full h-7 transition duration-150 ease-in px-3">
-                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                            </svg>
+                        <div class="relative">
+                            <button
+                                @click="isOpen = !isOpen"  
+                                class="bg-gray-100 relative hover:bg-gray-200 border rounded-full h-7 transition duration-150 ease-in px-3">
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                                </svg>
+                            </button>
                             <ul 
                                 x-cloak
                                 x-show.transition.origin.top.left="isOpen"
                                 @click.away="isOpen = false"
                                 @keydown.escape.window="isOpen = false"
                                 class="absolute w-44 text-left font-semibold bg-white shadow-dialog rounded-xl py-3 z-10 md:ml-8 top-8 md:top-6 right-0 md:left-0">
-                                <li><a href="#" class="hover:bg-gray-100 block px-5 py-3">Mark as Spam</a></li>
+                                <li><a href="#" class="hover:bg-gray-100 block px-5 py-3">Edit Idea</a></li> 
                                 <li><a href="#" class="hover:bg-gray-100 block px-5 py-3">Delete Post</a></li>
+                                <li><a href="#" class="hover:bg-gray-100 block px-5 py-3">Mark as Spam</a></li>
                             </ul>
-                        </button>
+                        </div>
+                        
                     </div>
                     <div class="flex items-center md:hidden mt-4 md:mt-0">
                         <div class="bg-gray-100 text-center rounded-xl h-10 px-4 py-2 pr-8">

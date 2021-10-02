@@ -11,6 +11,8 @@
 
 	<livewire:idea-show :idea="$idea" :voteCount="$voteCount"/>
 
+	<livewire:edit-idea />
+
     <div class="comments-container relative space-y-6 md:ml-22 pt-4 my-8 mt-1">
     	<div class="comment-container relative bg-white rounded-xl flex mt-4">
 	        <div class="flex flex-col md:flex-row flex-1 px-4 py-6">
@@ -32,13 +34,15 @@
 	                    <div 
 	                    	x-data="{ isOpen: false }" 
 	                    	class="flex items-center space-x-2"> 
-	                        <button
-	                        	@click="isOpen = !isOpen"  
-	                        	class="bg-gray-100 relative hover:bg-gray-200 border rounded-full h-7 transition duration-150 ease-in px-3">
-	                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-	                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-	                            </svg>
-	                            <ul 
+	                    	<div class="relative">
+	                    		<button
+		                        	@click="isOpen = !isOpen"  
+		                        	class="bg-gray-100 relative hover:bg-gray-200 border rounded-full h-7 transition duration-150 ease-in px-3">
+		                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+		                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+		                            </svg>
+		                        </button>
+		                        <ul 
 	                            	x-cloak
                                     x-show.transition.origin.top.left="isOpen"
                                     @click.away="isOpen = false"
@@ -47,7 +51,8 @@
 	                                <li><a href="#" class="hover:bg-gray-100 block px-5 py-3">Mark as Spam</a></li>
 	                                <li><a href="#" class="hover:bg-gray-100 block px-5 py-3">Delete Post</a></li>
 	                            </ul>
-	                        </button>
+	                    	</div>
+	                        
 	                    </div>
 	                </div>
 	            </div>
