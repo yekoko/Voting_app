@@ -1,6 +1,4 @@
-## URLShortenerApplication
-
-Votind app tools in Laravel
+## VotingApplication
 
 ## Requirements
 * PHP >= 7.2.5
