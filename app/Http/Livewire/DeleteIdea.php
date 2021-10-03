@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Http\Response;
 use App\Models\Idea;
 use App\Models\Vote;
+use App\Models\Comment;
 
 class DeleteIdea extends Component
 {
@@ -23,6 +24,8 @@ class DeleteIdea extends Component
         }
 
         Vote::where('idea_id', $this->idea->id)->delete();
+
+        Comment::where('idea_id', $this->idea->id)->delete();
 
         Idea::destroy($this->idea->id);
 
