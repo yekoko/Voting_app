@@ -49,9 +49,19 @@
                                         "
                                         class="hover:bg-gray-100 block px-5 py-3">Edit Comment</a>
                                 </li> 
+
+                                <li>
+                                    <a 
+                                        href="#" 
+                                        @click.prevent="
+                                            isOpen = false 
+                                            Livewire.emit('setDeleteComment', {{ $comment->id }})
+                                        "
+                                        class="hover:bg-gray-100 block px-5 py-3">Delete Comment</a>
+                                </li> 
                                 
                                 <!-- <li><a href="#" class="hover:bg-gray-100 block px-5 py-3">Mark as Spam</a></li> -->
-                                <li><a href="#" class="hover:bg-gray-100 block px-5 py-3">Delete Comment</a></li>
+                                <!-- <li><a href="#" class="hover:bg-gray-100 block px-5 py-3">Delete Comment</a></li> -->
                             </ul>
                         @endcan
                     </div>

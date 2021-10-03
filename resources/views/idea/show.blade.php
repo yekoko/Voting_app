@@ -23,4 +23,6 @@
     <livewire:idea-comments :idea="$idea" />
 
     <livewire:edit-comment />
+
+    <livewire:delete-comment />
 </x-app-layout>
