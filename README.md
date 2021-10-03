@@ -1,14 +1,6 @@
 ## URLShortenerApplication
 
-URL shortening tools in Laravel
-
-### Features
-* URL Shortener.
-* Customized short URLs.
-* Expire date for shorten URLs.
-* Click limitation for short's URLs.
-* User's dashboard.
-* Written in [PHP](https://www.php.net/) and [Laravel 8](https://laravel.com/docs/8.x).
+Votind app tools in Laravel
 
 ## Requirements
 * PHP >= 7.2.5
